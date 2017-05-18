@@ -25,6 +25,7 @@
 	       hungry-delete
 	       smartparens
 	       popwin
+	       web-mode
 	       ;; --- Major Mode ---
 	       markdown-mode
                ) "Default packages")
@@ -50,6 +51,19 @@
 (global-company-mode t)
 (require 'popwin)
 (popwin-mode t)
+
+;; web-mode
+(setq auto-mode-alist
+      (append
+       '(("\\.html\\'" . web-mode))
+       auto-mode-alist))
+(defun my-web-mode-indent-setup ()
+  (setq web-mode-markup-indent-offset 2) ; web-mode, html tag in html file
+  (setq web-mode-css-indent-offset 2)    ; web-mode, css in html file
+  (setq web-mode-code-indent-offset 2)   ; web-mode, js code in html file
+  )
+(add-hook 'web-mode-hook 'my-web-mode-indent-setup)
+
 
 ;; 文件末尾
 (provide 'init-packages)
